@@ -1,0 +1,273 @@
+#include<iostream>
+
+using namespace std;
+
+//1. Fill Array
+int *CreateArray(int n = 0)
+{
+	int * arr = new int[n];
+	int j = 0;
+
+	for (int i = 0; i < n; i++)
+	{
+		arr[i] = j;
+		j++;
+	}
+
+	return arr;
+}
+
+//2. Addition
+void AdditionNumbers(int * arr, int n)
+{
+	int sum = 0;
+	int val = 0;
+
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = i + 1; j < n; j++)
+		{
+			sum = i + j;
+			val = sum % n;
+			cout << val << " ";			
+		}
+		cout << endl;
+	}
+
+	cout << "---------------------" << endl;
+}
+
+//3. Division
+void DivisionNumbers(int * arr, int n)
+{
+	int div = 0;
+	int val = 0;
+
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = i + 1; j < n; j++)
+		{
+			div = i - j;
+			val = div % n;
+			cout << abs(val) << " ";
+		}
+		cout << endl;
+	}
+
+	cout << "---------------------" << endl;
+}
+
+//4. Multiplication
+void MultiplicationNumbers(int * arr, int n)
+{
+	int mul = 0;
+	int val = 0;
+
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = i + 1; j < n; j++)
+		{
+			mul = i * j;
+			val = mul % n;
+			cout << val << " ";
+			
+		}
+		cout << endl;
+	}
+
+	cout << "---------------------" << endl;
+}
+
+//5. Pairs
+int ArrayCount(int * arr, int n)
+{
+	int mul = 0;
+	int val = 0;
+	int counter = 0;
+
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = i + 1; j < n; j++)
+		{
+			mul = i * j;
+			val = mul % n;
+			if (val == 1)
+			{
+				counter++;
+			}
+		}
+	}
+
+	return counter;
+}
+
+int** MulPairs(int * arr, int counter, int n)
+{
+	int mul = 0;
+	int val = 0;
+
+	int **pairs = new int *[counter];
+
+	for (int i = 0; i < 2; i++)
+	{
+		pairs[i] = new int[2];
+	}
+	int k = 0;
+
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = i + 1; j < n; j++)
+		{
+			mul = i * j;
+			val = mul % n;
+			if (val == 1)
+			{	
+				pairs[k][0] = i;				
+				pairs[k][1] = j;
+
+				k++;
+			}
+		}
+	}
+
+	for (int i = 0; i < counter; i++)
+	{
+		for (int j = 0; j < 2; j++)
+		{
+			cout << pairs[i][j] << " ";
+		}
+		cout << endl;
+	}
+
+	cout << "---------------------" << endl;
+
+	return pairs;
+}
+
+//6. Reciprocal
+void Reciprocal(int **pairs, int counter)
+{
+		for (int i = 0; i < counter; i++)
+		{
+			for (int j = 0; j < 2; j++)
+			{
+				cout << "1/" << pairs[i][j] << " ";
+			}
+			cout << endl;
+		}
+		cout << "---------------------" << endl;
+}
+
+//8. Division
+void DivideNumbers(int * arr, int n)
+{
+	double div;
+
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = i + 1; j < n; j++)
+		{
+
+			div = i * (1 / j);
+			if (div <= n)
+			{
+				cout << div << " ";
+			}
+		}
+		cout << endl;
+	}
+
+	cout << "---------------------" << endl;
+}
+
+//9. PowerNumbersOne
+void PowerNumbersOne(int * arr, int n)
+{
+	int a = 0, counter = 2, m, k;
+	do
+	{
+		cout << "Please select which element you want to power.";
+		cin >> a;
+		
+	} while (a >= n || a < 0);
+
+	a--;
+	if (a < 0)
+	{
+		a = 0;
+	}
+	cout << "Please enter power";
+	cin >> m;
+
+	int see = arr[a];
+
+	int num = (arr[a] * arr[a]) % n;
+	int temp = num;
+
+	for (int i = 0; i < n; i++)
+	{
+		cout << arr[i];
+	}
+
+	for (int i = 1; i <= n; i++)
+	{
+		temp = (temp*arr[a]) % n;		
+		
+		if (temp == 1)
+		{
+			k = counter;
+			cout << k;
+			break;
+		}
+
+		counter++;
+	}
+	
+	int result = (arr[a] ^ (m % k)) % n;
+
+	cout << result << endl;
+
+
+
+	cout << "---------------------" << endl;
+}
+
+int main()
+{
+	int n;
+	int *arr;
+	int **pairs;
+	int counter = 0;
+
+	do
+	{
+		cout << "Please enter a num value for n: ";
+		cin >> n;
+	} while (n > 9 || n < 0);
+
+
+
+	arr = CreateArray(n);
+
+	AdditionNumbers(arr, n);
+
+	DivisionNumbers(arr, n);
+
+	MultiplicationNumbers(arr, n);	
+
+	counter = ArrayCount(arr, n);
+
+	pairs = MulPairs(arr, counter, n);
+
+	Reciprocal(pairs,counter);
+
+	DivideNumbers(arr, n);
+
+	PowerNumbersOne(arr, n);
+
+
+	delete[] arr;
+
+	return 0;
+}
+
