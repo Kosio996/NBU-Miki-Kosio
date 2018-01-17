@@ -1,0 +1,416 @@
+#include<iostream>
+#include<cmath>
+
+using namespace std;
+
+//1. Fill Array
+int *CreateArray(int n = 0)
+{
+	int * arr = new int[n];
+	int j = 0;
+
+	for (int i = 0; i < n; i++)
+	{
+		arr[i] = j;
+		j++;
+	}
+
+	return arr;
+}
+
+//2. Addition
+void AdditionNumbers(int * arr, int n)
+{
+	int sum = 0;
+	int val = 0;
+
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = i + 1; j < n; j++)
+		{
+			sum = i + j;
+			val = sum % n;
+			cout << val << " ";
+		}
+		cout << endl;
+	}
+
+	cout << "---------------------" << endl;
+}
+
+//3. Division
+void DivisionNumbers(int * arr, int n)
+{
+	int div = 0;
+	int val = 0;
+
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = i + 1; j < n; j++)
+		{
+			div = i - j;
+			val = div % n;
+			cout << abs(val) << " ";
+		}
+		cout << endl;
+	}
+
+	cout << "---------------------" << endl;
+}
+
+//4. Multiplication
+void MultiplicationNumbers(int * arr, int n)
+{
+	int mul = 0;
+	int val = 0;
+
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = i + 1; j < n; j++)
+		{
+			mul = i * j;
+			val = mul % n;
+			cout << val << " ";
+
+		}
+		cout << endl;
+	}
+
+	cout << "---------------------" << endl;
+}
+
+//5. Pairs
+int ArrayCount(int * arr, int n)
+{
+	int mul = 0;
+	int val = 0;
+	int counter = 0;
+
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = i + 1; j < n; j++)
+		{
+			mul = i * j;
+			val = mul % n;
+			if (val == 1)
+			{
+				counter++;
+			}
+		}
+	}
+
+	return counter;
+}
+
+int** MulPairs(int * arr, int counter, int n)
+{
+	int mul = 0;
+	int val = 0;
+
+	int **pairs = new int *[counter];
+
+	for (int i = 0; i < 2; i++)
+	{
+		pairs[i] = new int[2];
+	}
+	int k = 0;
+
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = i + 1; j < n; j++)
+		{
+			mul = i * j;
+			val = mul % n;
+			if (val == 1)
+			{
+				pairs[k][0] = i;
+				pairs[k][1] = j;
+
+				k++;
+			}
+		}
+	}
+
+	for (int i = 0; i < counter; i++)
+	{
+		for (int j = 0; j < 2; j++)
+		{
+			cout << pairs[i][j] << " ";
+		}
+		cout << endl;
+	}
+
+	cout << "---------------------" << endl;
+
+	return pairs;
+}
+
+//6. Reciprocal
+void Reciprocal(int *arr, int n)
+{
+	int a = 0;
+
+	do
+	{
+		cout << "Please select which element you want: ";
+		cin >> a;
+
+	} while (a >= n || a < 0);
+
+	if (a == 0)
+	{
+		cout << "There is no reciprocal !";
+	}
+	else
+	{
+		cout << "Reciprocal is: " << pow(arr[a], -1) << endl;
+	}
+
+	cout << "---------------------" << endl;
+}
+
+//8. Division
+//void DivideNumbers(int * arr, int n)
+//{
+//	double div;
+//
+//	for (int i = 0; i < n; i++)
+//	{
+//		for (int j = i + 1; j < n; j++)
+//		{
+//
+//			div = i * (1 / j);
+//			if (div <= n)
+//			{
+//				cout << div << " ";
+//			}
+//		}
+//		cout << endl;
+//	}
+//
+//	cout << "---------------------" << endl;
+//}
+
+//9. PowerNumbersOne
+void PowerNumbersOne(int * arr, int n)
+{
+	int a = 0, counter = 2, m, k;
+	do
+	{
+		cout << "Please select which element you want to power: ";
+		cin >> a;
+
+	} while (a >= n || a < 0);
+
+	if (a < 0)
+	{
+		a = 0;
+	}
+	cout << "Please enter power: ";
+	cin >> m;
+
+	int num = (arr[a] * arr[a]) % n;
+	int temp = num;
+	int tempTwo = 0;
+
+
+	for (int i = 1; i <= n; i++)
+	{
+		temp = (temp*arr[a]);
+		tempTwo = temp % n;
+
+		if (tempTwo == 1)
+		{
+			k = counter + 1;
+			break;
+		}
+
+		temp = tempTwo;
+		counter++;
+	}
+
+	int power = m % k;
+
+	int result = pow(arr[a], power);
+
+	cout << endl;
+	cout << result % n << endl;
+
+	cout << "---------------------" << endl;
+}
+
+//void PowerNumbersTwo(int * arr, int n)
+//{
+//	int a = 0, counter = 2, m, k;
+//	do
+//	{
+//		cout << "Please select which element you want to power: ";
+//		cin >> a;
+//
+//	} while (a >= n || a < 0);
+//
+//	if (a < 0)
+//	{
+//		a = 0;
+//	}
+//	cout << "Please enter power: ";
+//	cin >> m;
+//
+//	int temp = m;
+//
+//	long long binaryNumber = 0;
+//	int remainder, i = 1;
+//	int sum = 0;
+//
+//	while (temp != 0)
+//	{
+//		remainder = temp % 2;
+//		temp /= 2;
+//		binaryNumber += remainder*i;
+//		i *= 10;
+//
+//		if (remainder == 1)
+//		{
+//			sum = 0;
+//		}
+//	}
+//
+//	cout << "---------------------" << endl;
+//}
+
+//Zadacha 10 - Stepen variant 2
+void PowerNumbersTwo(int * arr, int n)
+{
+	int a = 0, counter = 2, m, k;
+	do
+	{
+		cout << "Please select which element you want to raise to power m: ";
+		cin >> a;
+
+	} while (a >= n || a < 0);
+
+	if (a < 0)
+	{
+		a = 0;
+	}
+	cout << "Please enter m: ";
+	cin >> m;
+
+	int temp = m;
+
+	long long binaryNumber = 0, save = 0;
+	int remainder, i = 1, sum = 1, cntr = 0;
+	while (temp != 0)
+	{
+		remainder = temp % 2;
+		temp /= 2;
+		binaryNumber += remainder * i;
+		i *= 10;
+	}
+
+	save = binaryNumber;
+
+	//Find array size
+	while (binaryNumber > 0)
+	{
+		//int d1 = binaryNumber % 10;
+		binaryNumber /= 10;
+		cntr++;
+	}
+
+	int * arrBinary = new int[cntr];
+
+	//Create array recording the 0 and 1 in appropriate order for calc
+	while (save > 0)
+	{
+		for (int i = 0; i < cntr; i++)
+		{
+			int dig = save % 10;
+			save /= 10;
+			arrBinary[i] = dig;
+		}
+	}	
+
+	int power = 0, num = 0;
+	int * oneMoreArr = new int[cntr - 1];
+
+	oneMoreArr[0] = a;
+	oneMoreArr[1] = a * a;
+
+	for (k = 2; k < cntr - 1; k++) {
+		power = pow(2, k);
+		power /= 2;
+		num = pow(a, power);
+		num %= n;
+		pow(num, 2);
+		num %= n;
+		oneMoreArr[k] = num;
+
+	}
+
+	//Start from i=1 to cntr (ignore 10 power 0) for order of power
+	for (int i = 1; i < cntr - 1; i++)
+	{
+		//TODO calculate values that need to multiply sum
+		if (arrBinary[i] == 1)
+		{
+			sum *= oneMoreArr[i];
+		}
+
+	}
+
+
+
+	if (arrBinary[cntr - 1] == 1)
+	{
+		sum *= oneMoreArr[cntr - 2];
+	}
+
+	sum %= n;
+
+	cout << sum << endl;
+
+	cout << "End Task 10" << endl;
+}
+
+int main()
+{
+	int n;
+	int *arr;
+	int **pairs;
+	int counter = 0;
+
+	do
+	{
+		cout << "Please enter a num value for n: ";
+		cin >> n;
+	} while (n > 9 || n < 0);
+
+
+
+	arr = CreateArray(n);
+
+	AdditionNumbers(arr, n);
+
+	DivisionNumbers(arr, n);
+
+	MultiplicationNumbers(arr, n);
+
+	counter = ArrayCount(arr, n);
+
+	pairs = MulPairs(arr, counter, n);
+
+	/*Reciprocal(arr, n);*/
+
+	//DivideNumbers(arr, n);
+
+	PowerNumbersOne(arr, n);
+
+	PowerNumbersTwo(arr, n);
+
+
+	delete[] arr;
+
+	return 0;
+}
+
